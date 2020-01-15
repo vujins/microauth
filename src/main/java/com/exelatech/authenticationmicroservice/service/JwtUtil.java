@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 
 import com.exelatech.authenticationmicroservice.model.SimpleAuthority;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,9 @@ public class JwtUtil {
     // ================================================
     // security 
     // ================================================
+
+    @Autowired
+    private KeyStore keyStore;
     
     // ================================================
     // creation methods 
@@ -56,7 +60,7 @@ public class JwtUtil {
 
     public String generateJwt(UserDetails userDetails) {
         return getBuilderWithClaims(userDetails)
-            .signWith(signatureAlgorithm, getPrivateKey())
+            .signWith(signatureAlgorithm, keyStore.getPrivateKey())
             .compact();
     }
 
@@ -66,7 +70,7 @@ public class JwtUtil {
     private Claims extractAllClaims(String jws) throws ExpiredJwtException, UnsupportedJwtException,
             MalformedJwtException, SignatureException, IllegalArgumentException {
 
-        return Jwts.parser().setSigningKey(getPublicKey()).parseClaimsJws(jws).getBody();
+        return Jwts.parser().setSigningKey(keyStore.getPublicKey()).parseClaimsJws(jws).getBody();
     }
 
     public String extractSubject(String jws) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException,

@@ -39,7 +39,7 @@ public class KeyStore {
     return getKeyPairInstance().getPublic();
   }
 
-  private Key getPrivateKey() {
+  public Key getPrivateKey() {
     return getKeyPairInstance().getPrivate();
   }
 

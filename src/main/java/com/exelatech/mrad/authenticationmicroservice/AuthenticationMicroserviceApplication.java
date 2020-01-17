@@ -1,9 +1,9 @@
-package com.exelatech.authenticationmicroservice;
+package com.exelatech.mrad.authenticationmicroservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.exelatech"})
 public class AuthenticationMicroserviceApplication {
 
 	public static void main(String[] args) {

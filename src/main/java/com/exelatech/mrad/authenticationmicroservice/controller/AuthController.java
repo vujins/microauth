@@ -1,17 +1,17 @@
-package com.exelatech.authenticationmicroservice.controller;
+package com.exelatech.mrad.authenticationmicroservice.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
-import com.exelatech.authenticationmicroservice.errors.AuthException;
-import com.exelatech.authenticationmicroservice.errors.UserNotFoundException;
-import com.exelatech.authenticationmicroservice.model.AuthenticationRequest;
-import com.exelatech.authenticationmicroservice.model.AuthenticationResponse;
-import com.exelatech.authenticationmicroservice.service.JwtUtil;
-import com.exelatech.authenticationmicroservice.service.KeyStore;
+import com.exelatech.mrad.authenticationmicroservice.errors.AuthException;
+import com.exelatech.mrad.authenticationmicroservice.errors.UserNotFoundException;
+import com.exelatech.mrad.authenticationmicroservice.model.AuthenticationRequest;
+import com.exelatech.mrad.authenticationmicroservice.model.AuthenticationResponse;
+import com.exelatech.mrad.authfilter.model.KeyResponse;
+import com.exelatech.mrad.authenticationmicroservice.service.MircoAuthKeyStore;
+import com.exelatech.mrad.authfilter.util.JWTUtilService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,38 +35,37 @@ public class AuthController {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private JWTUtilService jwtUtilService;
 
     @Autowired
-    private KeyStore keyStore;
+    private MircoAuthKeyStore keyStore;
 
     @PostMapping
     // @ResponseStatus(code = HttpStatus.OK)
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request, HttpServletResponse response)
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request)
             throws RuntimeException {
 
         UserDetails userDetails;
-        String jws;
+        String jws = null;
 
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
             userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-            jws = jwtUtil.generateJwt(userDetails);
+            jws = jwtUtilService.generateJwt(userDetails);
         } catch (UsernameNotFoundException ex) {
             throw new UserNotFoundException(ex.getMessage());
         } catch (AuthenticationException ex) {
             throw new AuthException(ex.getMessage());
         }
 
-        // return ResonseEntity.ok(new AuthenticationResponse(jws))
         return new AuthenticationResponse(jws);
     }
 
     @GetMapping(path = "/key")
-    public AuthenticationResponse key() {
-        return new AuthenticationResponse(keyStore.getPublicKey().toString());
+    public KeyResponse key() {
+        return new KeyResponse(keyStore.getPublicKey().getEncoded());
     }
 
 }

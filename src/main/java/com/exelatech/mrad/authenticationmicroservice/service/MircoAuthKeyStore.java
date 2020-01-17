@@ -1,4 +1,4 @@
-package com.exelatech.authenticationmicroservice.service;
+package com.exelatech.mrad.authenticationmicroservice.service;
 
 import java.security.InvalidParameterException;
 import java.security.Key;
@@ -6,13 +6,17 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 
+import com.exelatech.mrad.authfilter.util.KeyStore;
+
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
  * KeyStore
  */
 @Service
-public class KeyStore {
+@Primary
+public class MircoAuthKeyStore implements KeyStore {
 
   private static KeyPair keyPair = null;
   private static final String keyPairAlgorithm = "RSA";

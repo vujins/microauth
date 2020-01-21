@@ -1,8 +1,8 @@
 package com.exelatech.mrad.authenticationmicroservice.security;
 
+import com.exelatech.mrad.authenticationmicroservice.service.MyUserDetailsService;
 import com.exelatech.mrad.authfilter.filters.JWTAuthFilter;
 import com.exelatech.mrad.authfilter.filters.RestExceptionHandlerFilter;
-import com.exelatech.mrad.authenticationmicroservice.service.MyUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
@@ -30,6 +30,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     private RestExceptionHandlerFilter exceptionHandlerFilter;
 
     @Override
+    @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
         auth.userDetailsService(myUserDetailsService);
@@ -49,17 +50,19 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors().and()
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/authenticate").permitAll()
-            .antMatchers("/authenticate/key").permitAll()
-            .antMatchers(HttpMethod.POST, "/user").permitAll()
-            .antMatchers("/user").hasAnyAuthority("ADMIN")
-            .anyRequest().authenticated()
-            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        .cors().and()
+        .csrf().disable()
+        .authorizeRequests()
+        .antMatchers("/authenticate").permitAll()
+        .antMatchers("/authenticate/public").permitAll()
+        .antMatchers(HttpMethod.POST, "/user").permitAll()
+        .antMatchers("/user").hasAnyAuthority("ADMIN")
+        // .anyRequest().authenticated()\
+        .anyRequest().permitAll()
+        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(exceptionHandlerFilter, JWTAuthFilter.class); //must be first
+        http.addFilterBefore(exceptionHandlerFilter, JWTAuthFilter.class); // must be first
     }
+
 }

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Primary
-public class MircoAuthKeyStore implements KeyStore {
+public class MircoAuthKeyStoreService implements KeyStore {
 
   private static KeyPair keyPair = null;
   private static final String keyPairAlgorithm = "RSA";

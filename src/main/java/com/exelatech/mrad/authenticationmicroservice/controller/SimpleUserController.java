@@ -43,8 +43,8 @@ public class SimpleUserController {
 
         try {
             return simpleUserRepository.insert(simpleUser);
-        } catch (DuplicateKeyException e) {
-            throw new UserAlreadyExistsException("User already exists", e);
+        } catch (DuplicateKeyException ex) {
+            throw new UserAlreadyExistsException("User already exists", ex);
         }
     }
 
@@ -58,8 +58,8 @@ public class SimpleUserController {
 
         try {
             return myUserDetailsService.loadSimpleUserByUsername(username);
-        } catch (UsernameNotFoundException e) {
-            throw new UserNotFoundException("User not found", e);
+        } catch (UsernameNotFoundException ex) {
+            throw new UserNotFoundException("User not found", ex);
         }
     }
 

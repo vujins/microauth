@@ -8,10 +8,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.exelatech.mrad</groupId>
-	<artifactId>authentication-microservice</artifactId>
+	<artifactId>microauth</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>authentication-microservice</name>
-	<description>Microservice for authentication</description>
+	<name>microauth</name>
+	<description>Microservice for JWT authentication</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -50,7 +50,7 @@
 
 		<dependency>
 			<groupId>com.exelatech.mrad</groupId>
-			<artifactId>auth-filter</artifactId>
+			<artifactId>microauth-filter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

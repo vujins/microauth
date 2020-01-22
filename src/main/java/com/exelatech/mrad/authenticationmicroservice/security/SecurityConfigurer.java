@@ -57,12 +57,18 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .antMatchers("/authenticate/public").permitAll()
         .antMatchers(HttpMethod.POST, "/user").permitAll()
         .antMatchers("/user").hasAnyAuthority("ADMIN")
-        // .anyRequest().authenticated()\
-        .anyRequest().permitAll()
+        .anyRequest().authenticated()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(exceptionHandlerFilter, JWTAuthFilter.class); // must be first
     }
+
+    // @Bean
+    // CorsConfigurationSource corsConfigurationSource() {
+    //   final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //   source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+    //   return source;
+    // }
 
 }

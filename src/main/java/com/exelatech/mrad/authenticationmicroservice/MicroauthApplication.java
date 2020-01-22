@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = { "com.exelatech.mrad" })
-public class AuthenticationMicroserviceApplication {
+public class MicroauthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationMicroserviceApplication.class, args);
+		SpringApplication.run(MicroauthApplication.class, args);
 	}
 
 }

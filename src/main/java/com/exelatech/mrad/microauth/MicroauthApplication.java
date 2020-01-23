@@ -1,4 +1,4 @@
-package com.exelatech.mrad.authenticationmicroservice;
+package com.exelatech.mrad.microauth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,5 +1,5 @@
 
-package com.exelatech.mrad.authenticationmicroservice.model;
+package com.exelatech.mrad.microauth.model;
 
 import java.util.Collection;
 

@@ -1,10 +1,10 @@
-package com.exelatech.mrad.authenticationmicroservice.service;
+package com.exelatech.mrad.microauth.service;
 
 import java.util.Optional;
 
-import com.exelatech.mrad.authenticationmicroservice.dao.SimpleUserRepository;
-import com.exelatech.mrad.authenticationmicroservice.model.SimpleUser;
-import com.exelatech.mrad.authenticationmicroservice.model.SimpleUserDetails;
+import com.exelatech.mrad.microauth.dao.SimpleUserRepository;
+import com.exelatech.mrad.microauth.model.SimpleUser;
+import com.exelatech.mrad.microauth.model.SimpleUserDetails;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;

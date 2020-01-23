@@ -1,8 +1,8 @@
-package com.exelatech.mrad.authenticationmicroservice.errors;
+package com.exelatech.mrad.microauth.errors;
 
 import java.util.Date;
 
-import com.exelatech.mrad.authenticationmicroservice.model.ExceptionResponse;
+import com.exelatech.mrad.microauth.model.ExceptionResponse;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
-package com.exelatech.mrad.authenticationmicroservice.security;
+package com.exelatech.mrad.microauth.security;
 
-import com.exelatech.mrad.authenticationmicroservice.service.MyUserDetailsService;
+import com.exelatech.mrad.microauth.service.MyUserDetailsService;
 import com.exelatech.mrad.authfilter.filters.JWTAuthFilter;
 import com.exelatech.mrad.authfilter.filters.RestExceptionHandlerFilter;
 
@@ -53,10 +53,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .cors().and()
         .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/authenticate").permitAll()
-        .antMatchers("/authenticate/public").permitAll()
+        .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/authenticate").hasAnyAuthority("ADMIN")
+        .antMatchers("/publickey").permitAll()
         .antMatchers(HttpMethod.POST, "/user").permitAll()
+        .antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority("ADMIN")
         .antMatchers("/user").hasAnyAuthority("ADMIN")
+        .antMatchers("/user/**").hasAnyAuthority("ADMIN") // uradi preko parametara /user?username=root&...
         .anyRequest().authenticated()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

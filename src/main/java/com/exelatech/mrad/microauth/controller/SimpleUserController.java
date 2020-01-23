@@ -1,12 +1,12 @@
-package com.exelatech.mrad.authenticationmicroservice.controller;
+package com.exelatech.mrad.microauth.controller;
 
 import java.util.List;
 
-import com.exelatech.mrad.authenticationmicroservice.dao.SimpleUserRepository;
-import com.exelatech.mrad.authenticationmicroservice.errors.UserAlreadyExistsException;
-import com.exelatech.mrad.authenticationmicroservice.errors.UserNotFoundException;
-import com.exelatech.mrad.authenticationmicroservice.model.SimpleUser;
-import com.exelatech.mrad.authenticationmicroservice.service.MyUserDetailsService;
+import com.exelatech.mrad.microauth.dao.SimpleUserRepository;
+import com.exelatech.mrad.microauth.errors.UserAlreadyExistsException;
+import com.exelatech.mrad.microauth.errors.UserNotFoundException;
+import com.exelatech.mrad.microauth.model.SimpleUser;
+import com.exelatech.mrad.microauth.service.MyUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -57,7 +57,6 @@ public class SimpleUserController {
 
     @GetMapping(path = "/{username}")
     public SimpleUser findOne(@PathVariable String username) throws UserNotFoundException {
-
         try {
             return myUserDetailsService.loadSimpleUserByUsername(username);
         } catch (UsernameNotFoundException ex) {

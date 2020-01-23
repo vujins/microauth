@@ -1,5 +1,5 @@
 
-package com.exelatech.mrad.authenticationmicroservice.errors;
+package com.exelatech.mrad.microauth.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,4 +1,4 @@
-package com.exelatech.mrad.authenticationmicroservice.model;
+package com.exelatech.mrad.microauth.model;
 
 import lombok.Data;
 

@@ -1,11 +1,16 @@
-package com.exelatech.mrad.authenticationmicroservice.model;
+package com.exelatech.mrad.microauth.model;
 
 import java.util.Collection;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.Data;
 
 @Data
 public class SimpleUser {
+
+    @Id
+    private String _id;
 
     private String username;
 

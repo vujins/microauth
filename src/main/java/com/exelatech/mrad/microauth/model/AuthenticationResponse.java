@@ -1,4 +1,4 @@
-package com.exelatech.mrad.authenticationmicroservice.model;
+package com.exelatech.mrad.microauth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
 
-    private String content;
+    private String jwt;
+
+    private String refresh;
 
 }

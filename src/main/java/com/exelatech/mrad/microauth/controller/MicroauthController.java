@@ -6,7 +6,7 @@ import com.exelatech.mrad.microauth.errors.UserNotFoundException;
 import com.exelatech.mrad.microauth.model.AuthenticationRequest;
 import com.exelatech.mrad.microauth.model.AuthenticationResponse;
 import com.exelatech.mrad.microauth.model.RefreshToken;
-import com.exelatech.mrad.authfilter.service.JWTUtilService;
+import com.exelatech.mrad.microauthfilter.service.JWTUtilService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

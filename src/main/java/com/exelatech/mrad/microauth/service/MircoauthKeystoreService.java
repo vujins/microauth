@@ -6,7 +6,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 
-import com.exelatech.mrad.authfilter.service.KeyStore;
+import com.exelatech.mrad.microauthfilter.service.KeyStore;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

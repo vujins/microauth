@@ -1,5 +1,7 @@
 package com.exelatech.mrad.microauth.model;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -8,16 +10,10 @@ import lombok.Data;
 @Data
 public class ExceptionResponse {
 
-  private String timestamp;
-
-  private Integer status;
-  
-  private String error;
+  private Date timestamp;
 
   private String message;
 
   private String path;
-
-  private String exception;
 
 }

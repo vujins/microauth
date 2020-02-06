@@ -1,8 +1,8 @@
 package com.exelatech.mrad.microauth.security;
 
 import com.exelatech.mrad.microauth.service.MyUserDetailsService;
-import com.exelatech.mrad.authfilter.filters.JWTAuthFilter;
-import com.exelatech.mrad.authfilter.filters.RestExceptionHandlerFilter;
+import com.exelatech.mrad.microauthfilter.filters.JWTAuthFilter;
+import com.exelatech.mrad.microauthfilter.filters.RestExceptionHandlerFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -53,14 +53,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .cors().and()
         .csrf().disable()
         .authorizeRequests()
-        .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/authenticate").hasAnyAuthority("ADMIN")
-        .antMatchers("/publickey").permitAll()
-        .antMatchers(HttpMethod.POST, "/user").permitAll()
-        .antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority("ADMIN")
-        .antMatchers("/user").hasAnyAuthority("ADMIN")
-        .antMatchers("/user/**").hasAnyAuthority("ADMIN") // uradi preko parametara /user?username=root&...
-        .anyRequest().authenticated()
+        // .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+        // .antMatchers(HttpMethod.DELETE, "/authenticate").hasAnyAuthority("ADMIN")
+        // .antMatchers("/publickey").permitAll()
+        // .antMatchers(HttpMethod.POST, "/user").permitAll()
+        // .antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority("ADMIN")
+        // .antMatchers("/user").hasAnyAuthority("ADMIN")
+        // .antMatchers("/user/**").hasAnyAuthority("ADMIN") // uradi preko parametara /user?username=root&...
+        // .anyRequest().authenticated()
+        .anyRequest().permitAll()
         .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
